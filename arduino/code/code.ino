@@ -58,6 +58,8 @@ int startPositionY[] = {
 
 int servoDir[4] = {1,1,-1,-1};
 
+int move_dir = 0;
+
 volatile float site_now[4][2];    //real-time coordinates of the end of each leg
 volatile float site_expect[4][2]; //expected coordinates of the end of each leg
 
@@ -75,7 +77,7 @@ void wait_all_reach(void)
     wait_reach(i);
 }
 
-void move(int servoData[]) {
+void move_body(int servoData[]) {
 
   newServoValue(1,-100);
   newServoValue(5,-100);
@@ -225,36 +227,42 @@ Serial.println(mode);
       servoDir[1] = 1;
       servoDir[2] = -1;
       servoDir[3] = -1;
+      move_dir = 1;
       break;
     case 2:
       servoDir[0] = 1;
       servoDir[1] = -1;
       servoDir[2] = 1;
       servoDir[3] = -1;
+      move_dir = 1;
       break;
     case 3:
       servoDir[0] = 1;
       servoDir[1] = -1;
       servoDir[2] = -1;
       servoDir[3] = 1;
+      move_dir = 1;
       break;
     case 4:
       servoDir[0] = -1;
       servoDir[1] = -1;
       servoDir[2] = 1;
       servoDir[3] = -1;
+      move_dir = 1;
       break;
     case 5:
       servoDir[0] = -1;
       servoDir[1] = 1;
       servoDir[2] = -1;
       servoDir[3] = 1;
+      move_dir = 1;
       break;
     case 6:
       servoDir[0] = -1;
       servoDir[1] = 1;
       servoDir[2] = 1;
       servoDir[3] = -1;
+      move_dir = 1;
       break;
     case 8:
       goUp();
@@ -266,7 +274,10 @@ Serial.println(mode);
       break;
 
   }
-  move(servoDir);
+  if(move_dir > 0) {
+    move_body(servoDir);
+  }
+  
 } 
 
 // callback for received data
@@ -336,7 +347,7 @@ void sendData() {
   Wire.write(number);
 }
 
-void newServoValue(int servoNum,int newVal) {
+void newServoValueOld(int servoNum,int newVal) {
   if(servoCurrentPositions[servoNum]<startPositionX[servoNum]+newVal) {
     for (uint16_t pulselen = servoCurrentPositions[servoNum]; pulselen < startPositionX[servoNum]+newVal; pulselen++) {
       if(startPositionX[servoNum]+newVal<SERVOMAX) {
@@ -364,6 +375,18 @@ void newServoValue(int servoNum,int newVal) {
       
     } 
   }
+}
+
+void newServoValue(int servoNum,int newVal) {
+    if(startPositionX[servoNum]+newVal<SERVOMAX && startPositionX[servoNum]-newVal>SERVOMIN) {
+      servoCurrentPositions[servoNum] = startPositionX[servoNum]+newVal;
+      pwm.setPWM(servoNum, 0, servoCurrentPositions[servoNum]);
+        Serial.print(servoNum);
+    }
+    else{
+      Serial.print("bigger or smaller!");
+      return;  
+    }
 }
 
 
