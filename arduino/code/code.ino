@@ -160,7 +160,7 @@ void setDistance(){
 
 void loop() { 
   setDistance();
-
+  sendData();
 /*
   photocellValue = analogRead(photocellPin);
   Serial.println("Light value: ");
@@ -309,7 +309,8 @@ void receiveData(int byteCount) {
 
 // callback for sending data
 void sendData() {
-  Wire.write(coming_number);
+  Wire.write(distance);
+  delay(1000);
 }
 
 void newServoValue(int servoNum,int newVal) {
