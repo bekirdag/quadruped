@@ -47,7 +47,7 @@ int servoCurrentPositions[] = {315,495,335,535,282,430,410,460,335};
 
 int startPositionX[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
-  315,495,335,535,400,430,410,460,335
+  315,495,335,535,350,430,410,460,335
 }; 
 
 
@@ -56,14 +56,10 @@ int startPositionY[] = {
   startPositionX[0]-ninety,startPositionX[1]-ninety,startPositionX[2]-ninety,startPositionX[3]-ninety,startPositionX[4]-ninety,startPositionX[5]-ninety,startPositionX[6]-ninety,startPositionX[7]-ninety,startPositionX[8]-ninety
 }; 
 
+int servoDir[4] = {1,1,-1,-1};
+
 volatile float site_now[4][2];    //real-time coordinates of the end of each leg
 volatile float site_expect[4][2]; //expected coordinates of the end of each leg
-
-
-void moveAbit(int direction) {
-  turnAround(-1);
-  walk(direction);
-}
 
 void wait_reach(int leg)
 {
@@ -79,21 +75,17 @@ void wait_all_reach(void)
     wait_reach(i);
 }
 
-void walk(int direction) {
-  if(distance<20 && direction<0)
-  {
-    // moveAbit(direction);
-    return;
-  }
+void move(int servoData[]) {
+
   newServoValue(1,-100);
   newServoValue(5,-100);
   delay(servoDelay);
 
   // up
-  newServoValue(0,fourty_five*direction);
-  newServoValue(2,fourty_five*direction*(-1));
-  newServoValue(4,fourty_five*direction*(-1));
-  newServoValue(6,fourty_five*direction);
+  newServoValue(0,fourty_five*servoData[0]);
+  newServoValue(2,fourty_five*servoData[1]);
+  newServoValue(4,fourty_five*servoData[2]);
+  newServoValue(6,fourty_five*servoData[3]);
   delay(servoDelay);
 
   newServoValue(1,0);
@@ -105,10 +97,10 @@ void walk(int direction) {
   delay(servoDelay);
 
   // down
-  newServoValue(0,fourty_five*direction*(-1));
-  newServoValue(2,fourty_five*direction);
-  newServoValue(4,fourty_five*direction);
-  newServoValue(6,fourty_five*direction*(-1));
+  newServoValue(0,fourty_five*servoData[0]*(-1));
+  newServoValue(2,fourty_five*servoData[1]*(-1));
+  newServoValue(4,fourty_five*servoData[2]*(-1));
+  newServoValue(6,fourty_five*servoData[3]*(-1));
   delay(servoDelay);
 
   newServoValue(8,0);
@@ -118,10 +110,10 @@ void walk(int direction) {
 }
 
 void goLay() {
-  newServoValue(1,fourty_five*(-2));
-  newServoValue(8,fourty_five*(-2));
-  newServoValue(5,fourty_five*(-2));
-  newServoValue(7,fourty_five*(-2));
+  newServoValue(1,ninety*(-1));
+  newServoValue(8,ninety*(-1));
+  newServoValue(5,ninety*(-1));
+  newServoValue(7,ninety*(-1));
 }
 
 void goUp() {
@@ -149,76 +141,6 @@ void setup() {
 
 void standStill() {
   changePos(startPositionX);
-}
-
-void swim(int direction) {
-  newServoValue(1,-100);
-  newServoValue(5,-100);
-  delay(servoDelay);
-
-  // up
-  newServoValue(0,fourty_five*direction);
-  newServoValue(2,fourty_five*direction);
-  newServoValue(4,fourty_five*direction*(-1));
-  newServoValue(6,fourty_five*direction*(-1));
-
-  delay(servoDelay);
-
-  newServoValue(1,0);
-  newServoValue(5,0);
-
-  delay(servoDelay);
-
-  newServoValue(8,-100);
-  newServoValue(7,-100);
-  delay(servoDelay);
-
-  // down
-  newServoValue(0,fourty_five*direction*(-1));
-  newServoValue(2,fourty_five*direction*(-1));
-  newServoValue(4,fourty_five*direction);
-  newServoValue(6,fourty_five*direction);
-
-  delay(servoDelay);
-
-
-  newServoValue(8,0);
-  newServoValue(7,0);
-  delay(servoDelay);
-}
-
-void turnAround(int direction) {
-  newServoValue(1,-100);
-  newServoValue(5,-100);
-  delay(servoDelay);
-
-  // up
-  newServoValue(0,fourty_five*direction);
-  newServoValue(2,fourty_five*direction*(-1));
-  newServoValue(4,fourty_five*direction);
-  newServoValue(6,fourty_five*direction*(-1));
-  
-  delay(servoDelay);
-
-  newServoValue(1,0);
-  newServoValue(5,0);
-  delay(servoDelay);
-
-  newServoValue(8,-100);
-  newServoValue(7,-100);
-  delay(servoDelay);
-
-  // down
-  newServoValue(0,fourty_five*direction*(-1));
-  newServoValue(2,fourty_five*direction);
-  newServoValue(4,fourty_five*direction*(-1));
-  newServoValue(6,fourty_five*direction);
-  delay(servoDelay);
-
-  newServoValue(8,0);
-  newServoValue(7,0);
-  delay(servoDelay);
-  
 }
 
 void changePos(int positions[]) {
@@ -293,37 +215,58 @@ delay(1000);
 Serial.println("Raspi val:");
 Serial.println(mode);
 */
-switch (mode) {
-  case 0:
-    standStill();
-    break;
-  case 1:
-    walk(-1);
-    break;
-  case 2:
-    walk(1);
-    break;
-  case 3:
-    turnAround(1);
-    break;
-  case 4:
-    turnAround(-1);
-    break;
-  case 5:
-    swim(1);
-    break;
-  case 6:
-    swim(-1);
-    break;
-  case 8:
-    goUp();
-    break;
-  case 9:
-    goLay();
-    break;
+  switch (mode) {
+    case 0:
+      standStill();
+    return;
+      break;
+    case 1:
+      servoDir[0] = 1;
+      servoDir[1] = 1;
+      servoDir[2] = -1;
+      servoDir[3] = -1;
+      break;
+    case 2:
+      servoDir[0] = 1;
+      servoDir[1] = -1;
+      servoDir[2] = 1;
+      servoDir[3] = -1;
+      break;
+    case 3:
+      servoDir[0] = 1;
+      servoDir[1] = -1;
+      servoDir[2] = -1;
+      servoDir[3] = 1;
+      break;
+    case 4:
+      servoDir[0] = -1;
+      servoDir[1] = -1;
+      servoDir[2] = 1;
+      servoDir[3] = -1;
+      break;
+    case 5:
+      servoDir[0] = -1;
+      servoDir[1] = 1;
+      servoDir[2] = -1;
+      servoDir[3] = 1;
+      break;
+    case 6:
+      servoDir[0] = -1;
+      servoDir[1] = 1;
+      servoDir[2] = 1;
+      servoDir[3] = -1;
+      break;
+    case 8:
+      goUp();
+    return;
+      break;
+    case 9:
+      goLay();
+    return;
+      break;
 
-}
-
+  }
+  move(servoDir);
 } 
 
 // callback for received data
