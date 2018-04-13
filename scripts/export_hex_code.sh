@@ -6,3 +6,4 @@ git add .
 git commit -m "Hex code updated"
 git push origin master
 
+ssh pi@annahita.local update_arduino
