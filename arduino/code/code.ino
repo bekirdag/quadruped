@@ -36,11 +36,11 @@ int distance;
 int fourty_five = 112;
 int ninety = fourty_five*2;
                              // 0,  1,  2,  3,  4,  5,  6,  7,  8
-int servoCurrentPositions[] = {315,495,335,535,330,430,410,460,535};
+int servoCurrentPositions[] = {315,495,335,535,380,430,410,460,535};
 
 int startPositionX[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
-  315,495,335,535,330,430,410,460,535
+  315,495,335,535,380,430,410,460,535
 }; 
 
 
@@ -124,8 +124,15 @@ void setup() {
   
 } 
 
-void standStill() {
-  changePos(startPositionX);
+void standStill(int axis) {
+  if(axis>0){
+    changePos(startPositionX);  
+  }
+  else
+  {
+    changePos(startPositionY);  
+  }
+  
 }
 
 void changePos(int positions[]) {
@@ -179,7 +186,7 @@ void loop() {
   switch (mode) {
     case 0:
     move_dir = 0;
-      standStill();
+      standStill(1);
     return;
       break;
     case 1:
@@ -224,9 +231,13 @@ void loop() {
       servoDir[3] = -1;
       move_dir = 1;
       break;
+    case 7:
+      standStill(0);
+      move_dir = 0;
+      break;
     case 8:
       goUp();
-    move_dir = 0;
+      move_dir = 0;
       break;
     case 9:
       goLay();
