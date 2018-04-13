@@ -35,12 +35,12 @@ int distance;
 
 int fourty_five = 112;
 int ninety = fourty_five*2;
-               // 0,  1,  2,  3,  4,  5,  6,  7,  8
-int servoCurrentPositions[] = {315,495,335,535,350,430,410,460,335};
+                             // 0,  1,  2,  3,  4,  5,  6,  7,  8
+int servoCurrentPositions[] = {315,495,335,535,380,430,410,260,335};
 
 int startPositionX[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
-  315,495,335,535,350,430,410,460,335
+  315,495,335,535,380,430,410,260,335
 }; 
 
 
