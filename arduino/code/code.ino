@@ -13,7 +13,7 @@ int state = 0;
 int raspi_val;
 int mode = 0;
 
-int servoDelay = 200;
+int servoDelay = 150;
 
 String inString = "";
 
@@ -120,7 +120,7 @@ void setup() {
   Wire.begin(SLAVE_ADDRESS);
   Wire.onReceive(receiveData);
 
-  delay(100);
+  delay(10);
   
 } 
 
