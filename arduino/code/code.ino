@@ -47,14 +47,14 @@ int startPositionX[] = {
 int startPositionY[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
   startPositionX[0]-ninety,
-  startPositionX[1]-ninety,
+  startPositionX[1],
   startPositionX[2]-ninety,
-  startPositionX[3]-ninety,
+  startPositionX[3],
   startPositionX[4]-ninety,
-  startPositionX[5]-ninety,
+  startPositionX[5],
   startPositionX[6]-ninety,
-  startPositionX[7]-ninety,
-  startPositionX[8]-ninety
+  startPositionX[7],
+  startPositionX[8]
 }; 
 
 int servoDir[4] = {1,1,-1,-1};
