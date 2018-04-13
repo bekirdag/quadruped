@@ -7,13 +7,13 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define SERVOMAX  600 // this is the 'maximum' pulse length count (out of 4096)
 #define SLAVE_ADDRESS 0x04 // raspberry pi connection
 
-char number[50];
+char coming_number[50];
 int state = 0;
 
 int raspi_val;
 int mode = 0;
 
-int servoDelay = 0;
+int servoDelay = 200;
 
 String inString = "";
 
@@ -23,27 +23,20 @@ int photocellValue = 0;
 int micPin = A1;
 int micVal = 0;
 
-const int analogIn = A2;
-int mVperAmp = 185; // use 100 for 20A Module and 66 for 30A Module
-int RawValue= 0;
-int ACSoffset = 2500; 
-double Voltage = 0;
-double Amps = 0;
-
 float tempC;
 int reading;
 int tempPin = 3;
 
-const int trigPin = 12;
-const int echoPin = 13;
+const int trigPin = 8;
+const int echoPin = 9;
 long duration;
 int distance;
 
 
 int fourty_five = 112;
 int ninety = fourty_five*2;
-
-int servoCurrentPositions[] = {315,495,335,535,282,430,410,460,335};
+               // 0,  1,  2,  3,  4,  5,  6,  7,  8
+int servoCurrentPositions[] = {315,495,335,535,350,430,410,460,335};
 
 int startPositionX[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
@@ -53,29 +46,19 @@ int startPositionX[] = {
 
 int startPositionY[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
-  startPositionX[0]-ninety,startPositionX[1]-ninety,startPositionX[2]-ninety,startPositionX[3]-ninety,startPositionX[4]-ninety,startPositionX[5]-ninety,startPositionX[6]-ninety,startPositionX[7]-ninety,startPositionX[8]-ninety
+  startPositionX[0]-ninety,
+  startPositionX[1]-ninety,
+  startPositionX[2]-ninety,
+  startPositionX[3]-ninety,
+  startPositionX[4]-ninety,
+  startPositionX[5]-ninety,
+  startPositionX[6]-ninety,
+  startPositionX[7]-ninety,
+  startPositionX[8]-ninety
 }; 
 
 int servoDir[4] = {1,1,-1,-1};
-
 int move_dir = 0;
-
-volatile float site_now[4][2];    //real-time coordinates of the end of each leg
-volatile float site_expect[4][2]; //expected coordinates of the end of each leg
-
-void wait_reach(int leg)
-{
-  while (1)
-    if (site_now[leg][0] == site_expect[leg][0])
-      if (site_now[leg][1] == site_expect[leg][1])
-        break;
-}
-
-void wait_all_reach(void)
-{
-  for (int i = 0; i < 4; i++)
-    wait_reach(i);
-}
 
 void move_body(int servoData[]) {
 
@@ -170,12 +153,8 @@ void setDistance(){
 
 void loop() { 
   setDistance();
-  //
 
-  /*
-  Serial.print("mode: ");
-  Serial.print(mode);
-  
+/*
   photocellValue = analogRead(photocellPin);
   Serial.println("Light value: ");
   Serial.println(photocellValue);
@@ -183,14 +162,11 @@ void loop() {
   reading = analogRead(tempPin);
   float voltage = reading * 5.19;
   voltage /= 1024.0;
-
-   // print out the voltage
-   Serial.print(voltage); Serial.println(" volts");
   
   float temperatureC = (voltage - 0.5) * 100 ;
   Serial.print(temperatureC); Serial.println(" degrees C");
   delay(1000);
-/*
+
   micVal = analogRead(micPin);
   Serial.println("Volume: ");
   Serial.println (micVal);
@@ -198,27 +174,11 @@ void loop() {
  RawValue = analogRead(analogIn);
  Voltage = (RawValue / 1024.0) * 5000; // Gets you mV
  Amps = ((Voltage - ACSoffset) / mVperAmp);
- 
- 
- Serial.print("Raw Value = " ); // shows pre-scaled value 
- Serial.print(RawValue); 
- Serial.print("\t mV = "); // shows the voltage measured 
- Serial.print(Voltage,3); // the '3' after voltage allows you to display 3 digits after decimal point
- Serial.print("\t Amps = "); // shows the voltage measured 
- Serial.println(Amps,3); // the '3' after voltage allows you to display 3 digits after decimal point
- */
-/*
-
-
-delay(1000);
-
-
-
-Serial.println("Raspi val:");
-Serial.println(mode);
 */
+  
   switch (mode) {
     case 0:
+    move_dir = 0;
       standStill();
     return;
       break;
@@ -266,13 +226,12 @@ Serial.println(mode);
       break;
     case 8:
       goUp();
-    return;
+    move_dir = 0;
       break;
     case 9:
       goLay();
-    return;
+    move_dir = 0;
       break;
-
   }
   if(move_dir > 0) {
     move_body(servoDir);
@@ -282,27 +241,22 @@ Serial.println(mode);
 
 // callback for received data
 void receiveData(int byteCount) {
-  
   while (Wire.available()) {
     raspi_val = Wire.read();
   }
-
+  
   inString = (char)raspi_val;
-
   Serial.print(inString);
-
-
-  //raspi_val = (char)number.toInt();
+  if(inString=="0"){
+    mode = 0;
+  }
+  
   if(inString=="1"){
     mode = 1;
   }
 
   if(inString=="2"){
     mode = 2;
-  }
-
-  if(inString=="0"){
-    mode = 0;
   }
 
   if(inString=="3"){
@@ -344,44 +298,13 @@ void receiveData(int byteCount) {
 
 // callback for sending data
 void sendData() {
-  Wire.write(number);
-}
-
-void newServoValueOld(int servoNum,int newVal) {
-  if(servoCurrentPositions[servoNum]<startPositionX[servoNum]+newVal) {
-    for (uint16_t pulselen = servoCurrentPositions[servoNum]; pulselen < startPositionX[servoNum]+newVal; pulselen++) {
-      if(startPositionX[servoNum]+newVal<SERVOMAX) {
-        servoCurrentPositions[servoNum] = startPositionX[servoNum]+newVal;
-        pwm.setPWM(servoNum, 0, pulselen);
-          Serial.print(servoNum);
-      }
-      else{
-        Serial.print("bigger!");
-        return;  
-      }
-      
-    }  
-  }
-  else{
-    for (uint16_t pulselen = servoCurrentPositions[servoNum]; pulselen > startPositionX[servoNum]-newVal; pulselen--) {
-      if(startPositionX[servoNum]-newVal>SERVOMIN) {
-        servoCurrentPositions[servoNum] = startPositionX[servoNum]-newVal;
-        pwm.setPWM(servoNum, 0, pulselen);
-      }
-      else{
-        Serial.print("smaller!");
-        return;  
-      }
-      
-    } 
-  }
+  Wire.write(coming_number);
 }
 
 void newServoValue(int servoNum,int newVal) {
-    if(startPositionX[servoNum]+newVal<SERVOMAX && startPositionX[servoNum]-newVal>SERVOMIN) {
+    if((startPositionX[servoNum]+newVal<SERVOMAX) && startPositionX[servoNum]-newVal>SERVOMIN) {
       servoCurrentPositions[servoNum] = startPositionX[servoNum]+newVal;
       pwm.setPWM(servoNum, 0, servoCurrentPositions[servoNum]);
-        Serial.print(servoNum);
     }
     else{
       Serial.print("bigger or smaller!");
