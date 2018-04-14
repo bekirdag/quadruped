@@ -62,7 +62,7 @@ int move_dir = 0;
 
 void move_body(int servoData[]) {
 
-  if(mode==1 && distance<20){
+  if(mode==1 && distance<40){
     return;  
   }
 
