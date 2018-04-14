@@ -1,0 +1,17 @@
+1. raspberry pi zero
+2. arduino pro mini
+3. air quality sensor
+4. camera
+5. temperature and humidity sensor
+6. gyro
+7. double switch
+8. pc9685
+9. distance sensor
+10. 2xsolar panel charging circuit
+11. 3x 3.7V 3A 18650
+12. 8xHD1160A servo
+13. 1xSG90 servo
+14. 3300 uF 10 V Capasitor
+15. 2x 65*65 solar panel
+16. 2x 5V 3A Voltage regulator
+17. 
