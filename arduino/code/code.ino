@@ -65,9 +65,15 @@ void move_body(int servoData[]) {
   if(mode==1 && distance<40){
     return;  
   }
-
-  newServoValue(1,-100);
-  newServoValue(5,-100);
+  int legOrder[4] = {1,5,8,7};
+  if(mode==4) {
+    legOrder[0] = 8;
+    legOrder[1] = 7;
+    legOrder[2] = 1;
+    legOrder[3] = 5;
+  }
+  newServoValue(legOrder[0],-100);
+  newServoValue(legOrder[1],-100);
   delay(servoDelay);
 
   // up
@@ -77,12 +83,12 @@ void move_body(int servoData[]) {
   newServoValue(6,fourty_five*servoData[3]);
   delay(servoDelay);
 
-  newServoValue(1,0);
-  newServoValue(5,0);
+  newServoValue(legOrder[0],0);
+  newServoValue(legOrder[1],0);
   delay(servoDelay);
 
-  newServoValue(8,-100);
-  newServoValue(7,-100);
+  newServoValue(legOrder[2],-100);
+  newServoValue(legOrder[3],-100);
   delay(servoDelay);
 
   // down
@@ -92,8 +98,8 @@ void move_body(int servoData[]) {
   newServoValue(6,fourty_five*servoData[3]*(-1));
   delay(servoDelay);
 
-  newServoValue(8,0);
-  newServoValue(7,0);
+  newServoValue(legOrder[2],0);
+  newServoValue(legOrder[3],0);
   delay(servoDelay);
   
 }
