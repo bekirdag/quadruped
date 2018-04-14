@@ -13,7 +13,7 @@ int state = 0;
 int raspi_val;
 int mode = 0;
 
-int servoDelay = 150;
+int servoDelay = 100;
 
 String inString = "";
 
@@ -66,12 +66,7 @@ void move_body(int servoData[]) {
     return;  
   }
   int legOrder[4] = {1,5,8,7};
-  if(mode==4) {
-    legOrder[0] = 8;
-    legOrder[1] = 7;
-    legOrder[2] = 1;
-    legOrder[3] = 5;
-  }
+
   newServoValue(legOrder[0],-100);
   newServoValue(legOrder[1],-100);
   delay(servoDelay);
