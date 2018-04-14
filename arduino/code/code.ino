@@ -27,8 +27,8 @@ float tempC;
 int reading;
 int tempPin = 3;
 
-const int trigPin = 8;
-const int echoPin = 9;
+const int trigPin = 6;
+const int echoPin = 5;
 long duration;
 int distance;
 
@@ -61,6 +61,10 @@ int servoDir[4] = {1,1,-1,-1};
 int move_dir = 0;
 
 void move_body(int servoData[]) {
+
+  if(mode==1 && distance<20){
+    return;  
+  }
 
   newServoValue(1,-100);
   newServoValue(5,-100);
@@ -310,7 +314,7 @@ void receiveData(int byteCount) {
 // callback for sending data
 void sendData() {
   Wire.write(distance);
-  delay(1000);
+  //delay(1000);
 }
 
 void newServoValue(int servoNum,int newVal) {
