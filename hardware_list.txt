@@ -1,17 +1,20 @@
-1. raspberry pi zero
-2. arduino pro mini
-3. air quality sensor
-4. camera
-5. temperature and humidity sensor
-6. gyro
-7. double switch
-8. pc9685
-9. distance sensor
-10. 2xsolar panel charging circuit
-11. 3x 3.7V 3A 18650
-12. 8xHD1160A servo
-13. 1xSG90 servo
-14. 3300 uF 10 V Capasitor
-15. 2x 65*65 solar panel
-16. 2x 5V 3A Voltage regulator
-17. 
+Component name							|		Unit weight			|		Total weight		|		
+------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Raspberry pi zero W					|				
+2. Arduino pro mini						|
+3. Air quality sensor					|
+4. Raspberry pi camera					|
+5. Temperature and humidity sensor		|
+6. Gyro									|
+7. Double switch						|
+8. Pc9685								|
+9. Distance sensor						|
+10. 2x Solar panel charging circuit		|
+11. 2x 3.7V 3A 18650					|
+12. 1x 11.1V Lipo						|			154				|		
+12. 8xHD1160A servo						|
+13. 1xSG90 servo						|
+14. 3300 uF 10 V Capasitor				|
+15. 3x 86x38 solar panel				|
+16. 2x 5V 3A Voltage regulator			|
+17. 4x Runner 250 Motor					|
