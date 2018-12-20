@@ -205,8 +205,8 @@ void setDistance(){
 }
 
 void loop() { 
-  setDistance();
-  sendData();
+  //setDistance();
+  //sendData();
 /*
   photocellValue = analogRead(photocellPin);
   Serial.println("Light value: ");
