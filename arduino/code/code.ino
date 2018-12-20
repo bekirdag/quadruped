@@ -66,13 +66,7 @@ int startPositionY[] = {
 int servoDir[4] = {1,-1,1,-1};
 int move_dir = 0;
 
-void move_body(int servoData[]) {
-
-/*
-  if(mode==1 && distance<40){
-    return;  
-  }
-*/
+void move_body_backwards() {
 
 pwm.setPWM(4, 0, SERVOMAX);
 pwm.setPWM(6, 0, SERVOMAX);
@@ -103,41 +97,42 @@ delay(servoDelay);
 pwm.setPWM(5, 0, SERVOMAX);
 pwm.setPWM(7, 0, SERVOMAX);
 
-//delay(servoDelay);
-/*
-  
-  int legOrder[4] = {4,5,6,7};
 
-  newServoValue(legOrder[0],fourty_five);
-  newServoValue(legOrder[1],fourty_five*(-1));
-  delay(servoDelay);
+}
 
-  // up
-  newServoValue(0,fourty_five*servoData[0]);
-  newServoValue(1,fourty_five*servoData[1]);
-  newServoValue(2,fourty_five*servoData[2]);
-  newServoValue(3,fourty_five*servoData[3]);
-  delay(servoDelay);
+void move_body_forwards() {
 
-  newServoValue(legOrder[0],0);
-  newServoValue(legOrder[1],0);
-  delay(servoDelay);
+pwm.setPWM(5, 0, SERVOMIN);
+pwm.setPWM(7, 0, SERVOMIN);
 
-  newServoValue(legOrder[2],fourty_five);
-  newServoValue(legOrder[3],fourty_five*(-1));
-  delay(servoDelay);
+delay(servoDelay);
 
-  // down
-  newServoValue(0,fourty_five*servoData[0]*(-1));
-  newServoValue(1,fourty_five*servoData[1]*(-1));
-  newServoValue(2,fourty_five*servoData[2]*(-1));
-  newServoValue(3,fourty_five*servoData[3]*(-1));
-  delay(servoDelay);
+pwm.setPWM(0, 0, SERVOMIN+ninety);
+pwm.setPWM(1, 0, SERVOMAX);
+pwm.setPWM(2, 0, SERVOMIN);
+pwm.setPWM(3, 0, SERVOMAX-ninety);
 
-  newServoValue(legOrder[2],0);
-  newServoValue(legOrder[3],0);
-  delay(servoDelay);
-  */
+delay(servoDelay);
+
+pwm.setPWM(5, 0, SERVOMAX);
+pwm.setPWM(7, 0, SERVOMAX);
+pwm.setPWM(4, 0, SERVOMAX);
+pwm.setPWM(6, 0, SERVOMAX);
+
+delay(servoDelay);
+
+pwm.setPWM(0, 0, SERVOMIN);
+pwm.setPWM(1, 0, SERVOMAX-ninety);
+pwm.setPWM(2, 0, SERVOMIN+ninety);
+pwm.setPWM(3, 0, SERVOMAX);
+
+delay(servoDelay);
+
+pwm.setPWM(4, 0, SERVOMIN);
+pwm.setPWM(6, 0, SERVOMIN);
+
+
+
 }
 
 void goLay() {
@@ -236,18 +231,10 @@ void loop() {
     return;
       break;
     case 1:
-      servoDir[0] = 1;
-      servoDir[1] = -1;
-      servoDir[2] = 1;
-      servoDir[3] = -1;
-      move_dir = 1;
+      move_body_forwards();
       break;
     case 2:
-      servoDir[0] = 1;
-      servoDir[1] = -1;
-      servoDir[2] = 1;
-      servoDir[3] = -1;
-      move_dir = 1;
+      move_body_backwards();
       break;
     case 3:
       servoDir[0] = 1;
@@ -289,9 +276,6 @@ void loop() {
       goLay();
     move_dir = 0;
       break;
-  }
-  if(move_dir > 0) {
-    move_body(servoDir);
   }
   
 } 
