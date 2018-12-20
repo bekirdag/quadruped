@@ -63,7 +63,7 @@ int startPositionY[] = {
   SERVOMIN
 }; 
 
-int servoDir[4] = {1,1,-1,-1};
+int servoDir[4] = {1,-1,1,-1};
 int move_dir = 0;
 
 void move_body(int servoData[]) {
@@ -76,8 +76,8 @@ void move_body(int servoData[]) {
   
   int legOrder[4] = {4,5,6,7};
 
-  newServoValue(legOrder[0],fourty_five*(-1));
-  newServoValue(legOrder[1],fourty_five);
+  newServoValue(legOrder[0],fourty_five);
+  newServoValue(legOrder[1],fourty_five*(-1));
   delay(servoDelay);
 
   // up
@@ -89,11 +89,11 @@ void move_body(int servoData[]) {
 
   newServoValue(legOrder[0],0);
   newServoValue(legOrder[1],0);
-  delay(10);
+  delay(servoDelay);
 
-  newServoValue(legOrder[2],fourty_five*(-1));
-  newServoValue(legOrder[3],fourty_five);
-  delay(10);
+  newServoValue(legOrder[2],fourty_five);
+  newServoValue(legOrder[3],fourty_five*(-1));
+  delay(servoDelay);
 
   // down
   newServoValue(0,fourty_five*servoData[0]*(-1));
@@ -104,7 +104,7 @@ void move_body(int servoData[]) {
 
   newServoValue(legOrder[2],0);
   newServoValue(legOrder[3],0);
-  delay(10);
+  delay(servoDelay);
   
 }
 
