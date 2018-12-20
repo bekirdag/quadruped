@@ -44,10 +44,10 @@ int startPositionX[] = {
   SERVOMAX-ninety,
   SERVOMIN+ninety,
   SERVOMAX-ninety,
-  SERVOMAX,
   SERVOMIN,
   SERVOMAX,
-  SERVOMIN
+  SERVOMIN,
+  SERVOMAX
 }; 
 
 
@@ -57,10 +57,10 @@ int startPositionY[] = {
   SERVOMAX-ninety,
   SERVOMIN+ninety,
   SERVOMAX-ninety,
-  SERVOMIN,
   SERVOMAX,
   SERVOMIN,
-  SERVOMAX
+  SERVOMAX,
+  SERVOMIN
 }; 
 
 int servoDir[4] = {1,1,-1,-1};
@@ -76,30 +76,30 @@ void move_body(int servoData[]) {
   
   int legOrder[4] = {4,5,6,7};
 
-  newServoValue(legOrder[0],ninety);
-  newServoValue(legOrder[1],ninety*(-1));
+  newServoValue(legOrder[0],fourty_five);
+  newServoValue(legOrder[1],fourty_five*(-1));
   delay(servoDelay);
 
   // up
-  newServoValue(0,ninety*servoData[0]);
-  newServoValue(1,ninety*servoData[1]);
-  newServoValue(2,ninety*servoData[2]);
-  newServoValue(3,ninety*servoData[3]);
+  newServoValue(0,fourty_five*servoData[0]);
+  newServoValue(1,fourty_five*servoData[1]);
+  newServoValue(2,fourty_five*servoData[2]);
+  newServoValue(3,fourty_five*servoData[3]);
   delay(servoDelay);
 
   newServoValue(legOrder[0],0);
   newServoValue(legOrder[1],0);
   delay(10);
 
-  newServoValue(legOrder[2],ninety);
-  newServoValue(legOrder[3],ninety*(-1));
+  newServoValue(legOrder[2],fourty_five);
+  newServoValue(legOrder[3],fourty_five*(-1));
   delay(10);
 
   // down
-  newServoValue(0,ninety*servoData[0]*(-1));
-  newServoValue(1,ninety*servoData[1]*(-1));
-  newServoValue(2,ninety*servoData[2]*(-1));
-  newServoValue(3,ninety*servoData[3]*(-1));
+  newServoValue(0,fourty_five*servoData[0]*(-1));
+  newServoValue(1,fourty_five*servoData[1]*(-1));
+  newServoValue(2,fourty_five*servoData[2]*(-1));
+  newServoValue(3,fourty_five*servoData[3]*(-1));
   delay(servoDelay);
 
   newServoValue(legOrder[2],0);
