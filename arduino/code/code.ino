@@ -74,10 +74,10 @@ void move_body(int servoData[]) {
   }
 */
 
-pwm.setPWM(4, 0, SERVOMIN+200);
-pwm.setPWM(6, 0, SERVOMIN+200);
+pwm.setPWM(4, 0, SERVOMAX);
+pwm.setPWM(6, 0, SERVOMAX);
 
-delay(20);
+delay(50);
 
 pwm.setPWM(0, 0, SERVOMAX-fourty_five);
 pwm.setPWM(1, 0, SERVOMIN+fourty_five);
@@ -88,17 +88,17 @@ delay(servoDelay);
 
 pwm.setPWM(4, 0, SERVOMIN);
 pwm.setPWM(6, 0, SERVOMIN);
-pwm.setPWM(5, 0, SERVOMAX-200);
-pwm.setPWM(7, 0, SERVOMAX-200);
+pwm.setPWM(5, 0, SERVOMIN);
+pwm.setPWM(7, 0, SERVOMIN);
 
-delay(20);
+delay(50);
 
 pwm.setPWM(0, 0, SERVOMIN+fourty_five);
 pwm.setPWM(1, 0, SERVOMAX-fourty_five);
 pwm.setPWM(2, 0, SERVOMIN+fourty_five);
 pwm.setPWM(3, 0, SERVOMAX-fourty_five);
 
-delay(20);
+delay(50);
 
 
 pwm.setPWM(5, 0, SERVOMAX);
