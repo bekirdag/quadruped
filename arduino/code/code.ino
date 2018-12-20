@@ -40,13 +40,27 @@ int servoCurrentPositions[] = {SERVOMIN,SERVOMAX,SERVOMIN,SERVOMAX,SERVOMAX,SERV
 
 int startPositionX[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
-  SERVOMIN,SERVOMAX,SERVOMIN,SERVOMAX,SERVOMAX,SERVOMIN,SERVOMAX,SERVOMIN
+  SERVOMIN+ninety,
+  SERVOMAX-ninety,
+  SERVOMIN+ninety,
+  SERVOMAX-ninety,
+  SERVOMAX,
+  SERVOMIN,
+  SERVOMAX,
+  SERVOMIN
 }; 
 
 
 int startPositionY[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
-    SERVOMAX,SERVOMIN,SERVOMAX,SERVOMIN,SERVOMIN,SERVOMAX,SERVOMIN,SERVOMAX
+  SERVOMIN+ninety,
+  SERVOMAX-ninety,
+  SERVOMIN+ninety,
+  SERVOMAX-ninety,
+  SERVOMIN,
+  SERVOMAX,
+  SERVOMIN,
+  SERVOMAX
 }; 
 
 int servoDir[4] = {1,1,-1,-1};
