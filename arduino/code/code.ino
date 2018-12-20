@@ -13,7 +13,7 @@ int state = 0;
 int raspi_val;
 int mode = 0;
 
-int servoDelay = 100;
+int servoDelay = 1000;
 
 String inString = "";
 
@@ -77,12 +77,12 @@ void move_body(int servoData[]) {
 pwm.setPWM(4, 0, SERVOMAX);
 pwm.setPWM(6, 0, SERVOMAX);
 
-delay(50);
+delay(servoDelay);
 
-pwm.setPWM(0, 0, SERVOMAX-fourty_five);
-pwm.setPWM(1, 0, SERVOMIN+fourty_five);
-pwm.setPWM(2, 0, SERVOMAX+fourty_five);
-pwm.setPWM(3, 0, SERVOMIN-fourty_five);
+pwm.setPWM(0, 0, SERVOMAX-ninety);
+pwm.setPWM(1, 0, SERVOMIN+ninety);
+pwm.setPWM(2, 0, SERVOMAX+ninety);
+pwm.setPWM(3, 0, SERVOMIN-ninety);
 
 delay(servoDelay);
 
@@ -91,14 +91,14 @@ pwm.setPWM(6, 0, SERVOMIN);
 pwm.setPWM(5, 0, SERVOMIN);
 pwm.setPWM(7, 0, SERVOMIN);
 
-delay(50);
+delay(servoDelay);
 
-pwm.setPWM(0, 0, SERVOMIN+fourty_five);
-pwm.setPWM(1, 0, SERVOMAX-fourty_five);
-pwm.setPWM(2, 0, SERVOMIN+fourty_five);
-pwm.setPWM(3, 0, SERVOMAX-fourty_five);
+pwm.setPWM(0, 0, SERVOMIN+ninety);
+pwm.setPWM(1, 0, SERVOMAX-ninety);
+pwm.setPWM(2, 0, SERVOMIN+ninety);
+pwm.setPWM(3, 0, SERVOMAX-ninety);
 
-delay(50);
+delay(servoDelay);
 
 
 pwm.setPWM(5, 0, SERVOMAX);
