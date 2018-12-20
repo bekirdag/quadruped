@@ -13,7 +13,7 @@ int state = 0;
 int raspi_val;
 int mode = 0;
 
-int servoDelay = 100;
+int servoDelay = 50;
 
 String inString = "";
 
@@ -68,40 +68,43 @@ int move_dir = 0;
 
 void move_body(int servoData[]) {
 
+/*
   if(mode==1 && distance<40){
     return;  
   }
-  int legOrder[4] = {1,5,8,7};
+*/
+  
+  int legOrder[4] = {4,5,6,7};
 
   newServoValue(legOrder[0],-100);
-  newServoValue(legOrder[1],-100);
+  newServoValue(legOrder[1],100);
   delay(servoDelay);
 
   // up
   newServoValue(0,fourty_five*servoData[0]);
-  newServoValue(2,fourty_five*servoData[1]);
-  newServoValue(4,fourty_five*servoData[2]);
-  newServoValue(6,fourty_five*servoData[3]);
+  newServoValue(1,fourty_five*servoData[1]);
+  newServoValue(2,fourty_five*servoData[2]);
+  newServoValue(3,fourty_five*servoData[3]);
   delay(servoDelay);
 
   newServoValue(legOrder[0],0);
   newServoValue(legOrder[1],0);
-  delay(servoDelay);
+  delay(10);
 
   newServoValue(legOrder[2],-100);
-  newServoValue(legOrder[3],-100);
-  delay(servoDelay);
+  newServoValue(legOrder[3],100);
+  delay(10);
 
   // down
-  newServoValue(0,fourty_five*servoData[0]*(-1));
-  newServoValue(2,fourty_five*servoData[1]*(-1));
-  newServoValue(4,fourty_five*servoData[2]*(-1));
-  newServoValue(6,fourty_five*servoData[3]*(-1));
+  newServoValue(0,fourty_five*servoData[0]);
+  newServoValue(1,fourty_five*servoData[1]);
+  newServoValue(2,fourty_five*servoData[2]);
+  newServoValue(3,fourty_five*servoData[3]);
   delay(servoDelay);
 
   newServoValue(legOrder[2],0);
   newServoValue(legOrder[3],0);
-  delay(servoDelay);
+  delay(10);
   
 }
 
@@ -202,8 +205,8 @@ void loop() {
       break;
     case 1:
       servoDir[0] = 1;
-      servoDir[1] = 1;
-      servoDir[2] = -1;
+      servoDir[1] = -1;
+      servoDir[2] = 1;
       servoDir[3] = -1;
       move_dir = 1;
       break;
