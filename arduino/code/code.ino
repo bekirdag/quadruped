@@ -5,6 +5,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
 #define SERVOMIN  150 // this is the 'minimum' pulse length count (out of 4096)
 #define SERVOMAX  600 // this is the 'maximum' pulse length count (out of 4096)
+#define SERVOMID  375 // this is the 'maximum' pulse length count (out of 4096)
 #define SLAVE_ADDRESS 0x04 // raspberry pi connection
 
 char coming_number[50];
@@ -23,6 +24,17 @@ void setup() {
 
   pwm.begin();
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+
+
+      pwm.setPWM(0, 0, SERVOMIN);
+      pwm.setPWM(1, 0, SERVOMIN);
+      pwm.setPWM(2, 0, SERVOMIN);
+      pwm.setPWM(3, 0, SERVOMIN);
+
+      pwm.setPWM(4, 0, SERVOMIN);
+      pwm.setPWM(5, 0, SERVOMIN);
+      pwm.setPWM(6, 0, SERVOMIN);
+      pwm.setPWM(7, 0, SERVOMIN);
   
   analogReference(INTERNAL);
   Serial.begin(9600);
@@ -59,15 +71,15 @@ void loop() {
       
       break;
     case 2:
-      pwm.setPWM(0, 0, 375);
-      pwm.setPWM(1, 0, 375);
-      pwm.setPWM(2, 0, 375);
-      pwm.setPWM(3, 0, 375);
+      pwm.setPWM(0, 0, SERVOMID);
+      pwm.setPWM(1, 0, SERVOMID);
+      pwm.setPWM(2, 0, SERVOMID);
+      pwm.setPWM(3, 0, SERVOMID);
 
-      pwm.setPWM(4, 0, 375);
-      pwm.setPWM(5, 0, 375);
-      pwm.setPWM(6, 0, 375);
-      pwm.setPWM(7, 0, 375);
+      pwm.setPWM(4, 0, SERVOMID);
+      pwm.setPWM(5, 0, SERVOMID);
+      pwm.setPWM(6, 0, SERVOMID);
+      pwm.setPWM(7, 0, SERVOMID);
       
       break;
   }
