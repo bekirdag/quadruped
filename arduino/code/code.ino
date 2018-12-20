@@ -143,7 +143,7 @@ void standStill(int axis) {
 void changePos(int positions[]) {
   for (int servoNum = 0; servoNum < 8; servoNum++) {
     int servoControl = servoNum;
-    servoControl = (servoNum==3) ? 8 : servoNum;
+    //servoControl = (servoNum==3) ? 8 : servoNum;
     delay(servoDelay);
     pwm.setPWM(servoControl, 0, positions[servoNum]);
     newServoValue(servoControl,0);
