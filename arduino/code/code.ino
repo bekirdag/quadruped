@@ -13,7 +13,7 @@ int state = 0;
 int raspi_val;
 int mode = 0;
 
-int servoDelay = 50;
+int servoDelay = 100;
 
 String inString = "";
 
@@ -36,7 +36,7 @@ int distance;
 int fourty_five = 112;
 int ninety = fourty_five*2;
                              // 0,  1,  2,  3,  4,  5,  6,  7,  8
-int servoCurrentPositions[] = {SERVOMIN,SERVOMAX,SERVOMIN,SERVOMAX,SERVOMAX,SERVOMIN,SERVOMAX,SERVOMIN};
+int servoCurrentPositions[] = {SERVOMIN,SERVOMAX,SERVOMIN,SERVOMAX,SERVOMIN,SERVOMAX,SERVOMIN,SERVOMAX};
 
 int startPositionX[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
@@ -76,30 +76,30 @@ void move_body(int servoData[]) {
   
   int legOrder[4] = {4,5,6,7};
 
-  newServoValue(legOrder[0],-100);
-  newServoValue(legOrder[1],100);
+  newServoValue(legOrder[0],ninety);
+  newServoValue(legOrder[1],ninety*(-1));
   delay(servoDelay);
 
   // up
-  newServoValue(0,fourty_five*servoData[0]);
-  newServoValue(1,fourty_five*servoData[1]);
-  newServoValue(2,fourty_five*servoData[2]);
-  newServoValue(3,fourty_five*servoData[3]);
+  newServoValue(0,ninety*servoData[0]);
+  newServoValue(1,ninety*servoData[1]);
+  newServoValue(2,ninety*servoData[2]);
+  newServoValue(3,ninety*servoData[3]);
   delay(servoDelay);
 
   newServoValue(legOrder[0],0);
   newServoValue(legOrder[1],0);
   delay(10);
 
-  newServoValue(legOrder[2],-100);
-  newServoValue(legOrder[3],100);
+  newServoValue(legOrder[2],ninety);
+  newServoValue(legOrder[3],ninety*(-1));
   delay(10);
 
   // down
-  newServoValue(0,fourty_five*servoData[0]*(-1));
-  newServoValue(1,fourty_five*servoData[1]*(-1));
-  newServoValue(2,fourty_five*servoData[2]*(-1));
-  newServoValue(3,fourty_five*servoData[3]*(-1));
+  newServoValue(0,ninety*servoData[0]*(-1));
+  newServoValue(1,ninety*servoData[1]*(-1));
+  newServoValue(2,ninety*servoData[2]*(-1));
+  newServoValue(3,ninety*servoData[3]*(-1));
   delay(servoDelay);
 
   newServoValue(legOrder[2],0);
