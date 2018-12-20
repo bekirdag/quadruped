@@ -1,37 +1,163 @@
-/*
-  Blink
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
 
-  Turns an LED on for one second, then off for one second, repeatedly.
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
-  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
-  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
-  the correct LED pin independent of which board is used.
-  If you want to know what pin the on-board LED is connected to on your Arduino
-  model, check the Technical Specs of your board at:
-  https://www.arduino.cc/en/Main/Products
+#define SERVOMIN  150 // this is the 'minimum' pulse length count (out of 4096)
+#define SERVOMAX  600 // this is the 'maximum' pulse length count (out of 4096)
+#define SERVOMID  375 // this is the 'maximum' pulse length count (out of 4096)
+#define SLAVE_ADDRESS 0x04 // raspberry pi connection
 
-  modified 8 May 2014
-  by Scott Fitzgerald
-  modified 2 Sep 2016
-  by Arturo Guadalupi
-  modified 8 Sep 2016
-  by Colby Newman
+char coming_number[50];
+int state = 0;
 
-  This example code is in the public domain.
+int raspi_val;
+int mode = 0;
 
-  http://www.arduino.cc/en/Tutorial/Blink
-*/
+int servoDelay = 100;
 
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
+String inString = "";
+
+
+
+void setup() { 
+
+  pwm.begin();
+  pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+
+
+      pwm.setPWM(0, 0, SERVOMIN);
+      pwm.setPWM(1, 0, SERVOMIN);
+      pwm.setPWM(2, 0, SERVOMIN);
+      pwm.setPWM(3, 0, SERVOMIN);
+
+      pwm.setPWM(4, 0, SERVOMIN);
+      pwm.setPWM(5, 0, SERVOMIN);
+      pwm.setPWM(6, 0, SERVOMIN);
+      pwm.setPWM(7, 0, SERVOMIN);
+  
+  analogReference(INTERNAL);
+  Serial.begin(9600);
+  Wire.begin(SLAVE_ADDRESS);
+  Wire.onReceive(receiveData);
+  delay(10);
+  
+} 
+
+
+void loop() { 
+  sendData();
+  
+  switch (mode) {
+    case 0:
+      pwm.setPWM(0, 0, SERVOMIN);
+      pwm.setPWM(1, 0, SERVOMIN);
+      pwm.setPWM(2, 0, SERVOMIN);
+      pwm.setPWM(3, 0, SERVOMIN);
+
+      pwm.setPWM(4, 0, SERVOMIN);
+      pwm.setPWM(5, 0, SERVOMIN);
+      pwm.setPWM(6, 0, SERVOMIN);
+      pwm.setPWM(7, 0, SERVOMIN);
+      return;
+      break;
+    case 1:
+      pwm.setPWM(0, 0, SERVOMAX);
+      pwm.setPWM(1, 0, SERVOMAX);
+      pwm.setPWM(2, 0, SERVOMAX);
+      pwm.setPWM(3, 0, SERVOMAX);
+
+      pwm.setPWM(4, 0, SERVOMAX);
+      pwm.setPWM(5, 0, SERVOMAX);
+      pwm.setPWM(6, 0, SERVOMAX);
+      pwm.setPWM(7, 0, SERVOMAX);
+      
+      break;
+    case 2:
+      pwm.setPWM(0, 0, SERVOMID);
+      pwm.setPWM(1, 0, SERVOMID);
+      pwm.setPWM(2, 0, SERVOMID);
+      pwm.setPWM(3, 0, SERVOMID);
+
+      pwm.setPWM(4, 0, SERVOMID);
+      pwm.setPWM(5, 0, SERVOMID);
+      pwm.setPWM(6, 0, SERVOMID);
+      pwm.setPWM(7, 0, SERVOMID);
+      
+      break;
+  }
+} 
+
+// callback for received data
+void receiveData(int byteCount) {
+  while (Wire.available()) {
+    raspi_val = Wire.read();
+  }
+  
+  inString = (char)raspi_val;
+  Serial.print(inString);
+  if(inString=="0"){
+    mode = 0;
+  }
+  
+  if(inString=="1"){
+    mode = 1;
+  }
+
+  if(inString=="2"){
+    mode = 2;
+  }
+
+  if(inString=="3"){
+    mode = 3;
+  }
+
+    if(inString=="4"){
+    mode = 4;
+  }
+
+  if(inString=="5"){
+    mode = 5;
+  }
+
+  if(inString=="6"){
+    mode = 6;
+  }
+
+  if(inString=="7"){
+    mode = 7;
+  }
+  
+  if(inString=="8"){
+    mode = 8;
+  }
+
+  if(inString=="9"){
+    mode = 9;
+  }
+
+  if(inString=="10"){
+    mode = 10;
+  }
+
+  if(inString=="11"){
+    mode = 11;
+  }
+}  // end while
+
+
+// callback for sending data
+void sendData() {
+  Wire.write("hello world!");
+  //delay(1000);
 }
 
-// the loop function runs over and over again forever
-void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);                       // wait for a second
-}
+
+
+
+
+
+
+
+
+
