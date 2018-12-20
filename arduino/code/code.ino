@@ -25,16 +25,21 @@ void setup() {
   pwm.begin();
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
 
+delay(1000);
 
       pwm.setPWM(0, 0, SERVOMIN);
       pwm.setPWM(1, 0, SERVOMIN);
       pwm.setPWM(2, 0, SERVOMIN);
       pwm.setPWM(3, 0, SERVOMIN);
 
+    delay(1000);
+
       pwm.setPWM(4, 0, SERVOMIN);
       pwm.setPWM(5, 0, SERVOMIN);
       pwm.setPWM(6, 0, SERVOMIN);
       pwm.setPWM(7, 0, SERVOMIN);
+
+      delay(1000);
   
   analogReference(INTERNAL);
   Serial.begin(9600);
