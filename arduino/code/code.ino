@@ -79,13 +79,13 @@ pwm.setPWM(6, 0, SERVOMIN+100);
 
 delay(20);
 
-pwm.setPWM(0, 0, SERVOMIN+ninety+fourty_five);
-pwm.setPWM(1, 0, SERVOMAX-ninety-fourty_five);
-pwm.setPWM(2, 0, SERVOMIN+ninety+fourty_five);
-pwm.setPWM(3, 0, SERVOMAX-ninety-fourty_five);
+pwm.setPWM(0, 0, SERVOMIN+ninety*2);
+pwm.setPWM(1, 0, SERVOMAX-ninety*2);
+pwm.setPWM(2, 0, SERVOMIN+ninety*2);
+pwm.setPWM(3, 0, SERVOMAX-ninety*2);
 
 
-delay(20);
+delay(80);
 
 pwm.setPWM(4, 0, SERVOMIN);
 pwm.setPWM(6, 0, SERVOMIN);
