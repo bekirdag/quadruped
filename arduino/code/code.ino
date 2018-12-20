@@ -68,71 +68,68 @@ int move_dir = 0;
 
 void move_body_backwards() {
 
-pwm.setPWM(4, 0, SERVOMAX);
-pwm.setPWM(6, 0, SERVOMAX);
-
-delay(servoDelay);
-
-pwm.setPWM(0, 0, SERVOMIN);
-pwm.setPWM(1, 0, SERVOMAX-ninety);
-pwm.setPWM(2, 0, SERVOMIN+ninety);
-pwm.setPWM(3, 0, SERVOMAX);
-
-delay(servoDelay);
-
-pwm.setPWM(4, 0, SERVOMIN);
-pwm.setPWM(6, 0, SERVOMIN);
-pwm.setPWM(5, 0, SERVOMIN);
-pwm.setPWM(7, 0, SERVOMIN);
-
-delay(servoDelay);
-
-pwm.setPWM(0, 0, SERVOMIN+ninety);
-pwm.setPWM(1, 0, SERVOMAX);
-pwm.setPWM(2, 0, SERVOMIN);
-pwm.setPWM(3, 0, SERVOMAX-ninety);
-
-delay(servoDelay);
-
-pwm.setPWM(5, 0, SERVOMAX);
-pwm.setPWM(7, 0, SERVOMAX);
+  pwm.setPWM(4, 0, SERVOMAX);
+  pwm.setPWM(6, 0, SERVOMAX);
+  
+  delay(servoDelay);
+  
+  pwm.setPWM(0, 0, SERVOMIN);
+  pwm.setPWM(1, 0, SERVOMAX-ninety);
+  pwm.setPWM(2, 0, SERVOMIN+ninety);
+  pwm.setPWM(3, 0, SERVOMAX);
+  
+  delay(servoDelay);
+  
+  pwm.setPWM(4, 0, SERVOMIN);
+  pwm.setPWM(6, 0, SERVOMIN);
+  pwm.setPWM(5, 0, SERVOMIN);
+  pwm.setPWM(7, 0, SERVOMIN);
+  
+  delay(servoDelay);
+  
+  pwm.setPWM(0, 0, SERVOMIN+ninety);
+  pwm.setPWM(1, 0, SERVOMAX);
+  pwm.setPWM(2, 0, SERVOMIN);
+  pwm.setPWM(3, 0, SERVOMAX-ninety);
+  
+  delay(servoDelay);
+  
+  pwm.setPWM(5, 0, SERVOMAX);
+  pwm.setPWM(7, 0, SERVOMAX);
 
 
 }
 
 void move_body_forwards() {
-
-pwm.setPWM(5, 0, SERVOMIN);
-pwm.setPWM(7, 0, SERVOMIN);
-
-delay(servoDelay);
-
-pwm.setPWM(0, 0, SERVOMIN+ninety);
-pwm.setPWM(1, 0, SERVOMAX);
-pwm.setPWM(2, 0, SERVOMIN);
-pwm.setPWM(3, 0, SERVOMAX-ninety);
-
-delay(servoDelay);
-
-pwm.setPWM(5, 0, SERVOMAX);
-pwm.setPWM(7, 0, SERVOMAX);
-pwm.setPWM(4, 0, SERVOMAX);
-pwm.setPWM(6, 0, SERVOMAX);
-
-delay(servoDelay);
-
-pwm.setPWM(0, 0, SERVOMIN);
-pwm.setPWM(1, 0, SERVOMAX-ninety);
-pwm.setPWM(2, 0, SERVOMIN+ninety);
-pwm.setPWM(3, 0, SERVOMAX);
-
-delay(servoDelay);
-
-pwm.setPWM(4, 0, SERVOMIN);
-pwm.setPWM(6, 0, SERVOMIN);
-
-
-
+  
+  pwm.setPWM(4, 0, SERVOMAX);
+  pwm.setPWM(6, 0, SERVOMAX);
+  
+  delay(servoDelay);
+  
+  pwm.setPWM(0, 0, SERVOMIN+ninety);
+  pwm.setPWM(1, 0, SERVOMAX);
+  pwm.setPWM(2, 0, SERVOMIN);
+  pwm.setPWM(3, 0, SERVOMAX-ninety);
+  
+  delay(servoDelay);
+  
+  pwm.setPWM(4, 0, SERVOMIN);
+  pwm.setPWM(6, 0, SERVOMIN);
+  pwm.setPWM(5, 0, SERVOMIN);
+  pwm.setPWM(7, 0, SERVOMIN);
+  
+  delay(servoDelay);
+  
+  pwm.setPWM(0, 0, SERVOMIN);
+  pwm.setPWM(1, 0, SERVOMAX-ninety);
+  pwm.setPWM(2, 0, SERVOMIN+ninety);
+  pwm.setPWM(3, 0, SERVOMAX);
+  
+  delay(servoDelay);
+  
+  pwm.setPWM(5, 0, SERVOMAX);
+  pwm.setPWM(7, 0, SERVOMAX);
 }
 
 void goLay() {
