@@ -36,38 +36,38 @@ void setup() {
 void loop() { 
   switch (mode) {
     case 0:
-      pwm.setPWM(0, 0, 0);
-      pwm.setPWM(1, 0, 0);
-      pwm.setPWM(2, 0, 0);
-      pwm.setPWM(3, 0, 0);
+      pwm.setPWM(0, 0, SERVOMIN);
+      pwm.setPWM(1, 0, SERVOMIN);
+      pwm.setPWM(2, 0, SERVOMIN);
+      pwm.setPWM(3, 0, SERVOMIN);
 
-      pwm.setPWM(4, 0, 0);
-      pwm.setPWM(5, 0, 0);
-      pwm.setPWM(6, 0, 0);
-      pwm.setPWM(7, 0, 0);
+      pwm.setPWM(4, 0, SERVOMIN);
+      pwm.setPWM(5, 0, SERVOMIN);
+      pwm.setPWM(6, 0, SERVOMIN);
+      pwm.setPWM(7, 0, SERVOMIN);
       break;
     case 1:
-      pwm.setPWM(0, 0, 180);
-      pwm.setPWM(1, 0, 180);
-      pwm.setPWM(2, 0, 180);
-      pwm.setPWM(3, 0, 180);
+      pwm.setPWM(0, 0, SERVOMAX);
+      pwm.setPWM(1, 0, SERVOMAX);
+      pwm.setPWM(2, 0, SERVOMAX);
+      pwm.setPWM(3, 0, SERVOMAX);
 
-      pwm.setPWM(4, 0, 180);
-      pwm.setPWM(5, 0, 180);
-      pwm.setPWM(6, 0, 180);
-      pwm.setPWM(7, 0, 180);
+      pwm.setPWM(4, 0, SERVOMAX);
+      pwm.setPWM(5, 0, SERVOMAX);
+      pwm.setPWM(6, 0, SERVOMAX);
+      pwm.setPWM(7, 0, SERVOMAX);
       
       break;
     case 2:
-      pwm.setPWM(0, 0, 90);
-      pwm.setPWM(1, 0, 90);
-      pwm.setPWM(2, 0, 90);
-      pwm.setPWM(3, 0, 90);
+      pwm.setPWM(0, 0, 375);
+      pwm.setPWM(1, 0, 375);
+      pwm.setPWM(2, 0, 375);
+      pwm.setPWM(3, 0, 375);
 
-      pwm.setPWM(4, 0, 90);
-      pwm.setPWM(5, 0, 90);
-      pwm.setPWM(6, 0, 90);
-      pwm.setPWM(7, 0, 90);
+      pwm.setPWM(4, 0, 375);
+      pwm.setPWM(5, 0, 375);
+      pwm.setPWM(6, 0, 375);
+      pwm.setPWM(7, 0, 375);
       
       break;
   }
