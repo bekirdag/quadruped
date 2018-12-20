@@ -96,10 +96,10 @@ void move_body(int servoData[]) {
   delay(10);
 
   // down
-  newServoValue(0,fourty_five*servoData[0]);
-  newServoValue(1,fourty_five*servoData[1]);
-  newServoValue(2,fourty_five*servoData[2]);
-  newServoValue(3,fourty_five*servoData[3]);
+  newServoValue(0,fourty_five*servoData[0]*(-1));
+  newServoValue(1,fourty_five*servoData[1]*(-1));
+  newServoValue(2,fourty_five*servoData[2]*(-1));
+  newServoValue(3,fourty_five*servoData[3]*(-1));
   delay(servoDelay);
 
   newServoValue(legOrder[2],0);
