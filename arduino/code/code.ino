@@ -36,25 +36,25 @@ int distance;
 int fourty_five = 112;
 int ninety = fourty_five*2;
                              // 0,  1,  2,  3,  4,  5,  6,  7,  8
-int servoCurrentPositions[] = {315,495,335,535,400,430,410,460,535};
+int servoCurrentPositions[] = {SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN};
 
 int startPositionX[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
-  315,495,335,535,400,430,410,460,535
+  SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN,SERVOMIN
 }; 
 
 
 int startPositionY[] = {
 // 0,  1,  2,  3,  4,  5,  6,  7,  8
-  startPositionX[0]-ninety,
-  startPositionX[1],
-  startPositionX[2]-ninety,
-  startPositionX[3],
-  startPositionX[4]-ninety,
-  startPositionX[5],
-  startPositionX[6]-ninety,
-  startPositionX[7],
-  startPositionX[8]
+  SERVOMAX,
+  SERVOMAX,
+  SERVOMAX,
+  SERVOMAX,
+  SERVOMAX,
+  SERVOMAX,
+  SERVOMAX,
+  SERVOMAX,
+  SERVOMAX
 }; 
 
 int servoDir[4] = {1,1,-1,-1};
