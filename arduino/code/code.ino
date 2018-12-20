@@ -103,7 +103,7 @@ delay(servoDelay);
 pwm.setPWM(5, 0, SERVOMAX);
 pwm.setPWM(7, 0, SERVOMAX);
 
-delay(servoDelay);
+//delay(servoDelay);
 /*
   
   int legOrder[4] = {4,5,6,7};
