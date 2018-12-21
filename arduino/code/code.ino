@@ -138,11 +138,10 @@ void side_walk_backwards() {
   pwm.setPWM(6, 0, SERVOMAX);
   
   delay(servoDelay);
-  
   pwm.setPWM(0, 0, SERVOMIN+ninety);
   pwm.setPWM(1, 0, SERVOMAX-ninety);
-  pwm.setPWM(2, 0, SERVOMIN+ninety);
-  pwm.setPWM(3, 0, SERVOMAX-ninety);
+  pwm.setPWM(2, 0, SERVOMAX);
+  pwm.setPWM(3, 0, SERVOMIN);  
   
   delay(servoDelay);
   
@@ -152,12 +151,11 @@ void side_walk_backwards() {
   pwm.setPWM(7, 0, SERVOMIN);
   
   delay(servoDelay);
-
+  
   pwm.setPWM(0, 0, SERVOMAX);
   pwm.setPWM(1, 0, SERVOMIN);
-  pwm.setPWM(2, 0, SERVOMAX);
-  pwm.setPWM(3, 0, SERVOMIN);
-  
+  pwm.setPWM(2, 0, SERVOMIN+ninety);
+  pwm.setPWM(3, 0, SERVOMAX-ninety);
   
   delay(servoDelay);
   
@@ -174,8 +172,8 @@ void side_walk_forwards() {
   
   pwm.setPWM(0, 0, SERVOMAX);
   pwm.setPWM(1, 0, SERVOMIN);
-  pwm.setPWM(2, 0, SERVOMAX);
-  pwm.setPWM(3, 0, SERVOMIN);
+  pwm.setPWM(2, 0, SERVOMIN+ninety);
+  pwm.setPWM(3, 0, SERVOMAX-ninety);
   
   delay(servoDelay);
   
@@ -188,8 +186,8 @@ void side_walk_forwards() {
   
   pwm.setPWM(0, 0, SERVOMIN+ninety);
   pwm.setPWM(1, 0, SERVOMAX-ninety);
-  pwm.setPWM(2, 0, SERVOMIN+ninety);
-  pwm.setPWM(3, 0, SERVOMAX-ninety);
+  pwm.setPWM(2, 0, SERVOMAX);
+  pwm.setPWM(3, 0, SERVOMIN);
   
   delay(servoDelay);
   
