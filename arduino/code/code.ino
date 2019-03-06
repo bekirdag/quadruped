@@ -195,7 +195,7 @@ void side_walk_forwards() {
   pwm.setPWM(7, 0, SERVOMAX);
 }
 
-void turn_left() {
+void turn_left(int degree=ninety) {
   
   pwm.setPWM(4, 0, SERVOMAX);
   pwm.setPWM(6, 0, SERVOMAX);
@@ -228,7 +228,7 @@ void turn_left() {
   pwm.setPWM(7, 0, SERVOMAX);
 }
 
-void turn_right() {
+void turn_right(int degree=ninety) {
   
   pwm.setPWM(4, 0, SERVOMAX);
   pwm.setPWM(6, 0, SERVOMAX);
@@ -383,7 +383,15 @@ void loop() {
       break;
     case 9:
       goLay();
-    move_dir = 0;
+      move_dir = 0;
+      break;
+    case 10:
+      turn_left(1);
+      move_dir = 0;
+      break;
+    case 11:
+      turn_right(1);
+      move_dir = 0;
       break;
   }
   
