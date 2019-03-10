@@ -394,22 +394,26 @@ void loop() {
       move_dir = 0;
       break;
     case 12:
-      look_up();
+      look_at(150);
       break;
     case 13:
-      look_down();
+      look_at(600);
       break;
+    case 14:
+      look_at(375);
+      break;
+    case 15:
+      look_at(400);
+      break;
+      
   }
   
 } 
 
-void look_up() {
-  pwm.setPWM(8, 0, 300);
+void look_at(int where) {
+  pwm.setPWM(8, 0, where);
 }
 
-void look_down() {
-  pwm.setPWM(8, 0, 400);
-}
 
 // callback for received data
 void receiveData(int byteCount) {
@@ -473,6 +477,14 @@ void receiveData(int byteCount) {
 
   if(inString=="d"){
     mode = 13;
+  }
+
+  if(inString=="e"){
+    mode = 14;
+  }
+
+  if(inString=="f"){
+    mode = 15;
   }
   
 }  // end while
