@@ -27,8 +27,8 @@ float tempC;
 int reading;
 int tempPin = 3;
 
-const int trigPin = 6;
-const int echoPin = 5;
+const int trigPin = 9;
+const int echoPin = 8;
 long duration;
 int distance;
 
@@ -325,7 +325,7 @@ void setDistance(){
 }
 
 void loop() { 
-  //setDistance();
+  setDistance();
   //sendData();
 /*
   photocellValue = analogRead(photocellPin);
@@ -393,9 +393,23 @@ void loop() {
       turn_right(1);
       move_dir = 0;
       break;
+    case 12:
+      look_up();
+      break;
+    case 13:
+      look_down();
+      break;
   }
   
 } 
+
+void look_up() {
+  pwm.setPWM(9, 0, 300);
+}
+
+void look_down() {
+  pwm.setPWM(9, 0, 400);
+}
 
 // callback for received data
 void receiveData(int byteCount) {
@@ -445,13 +459,22 @@ void receiveData(int byteCount) {
     mode = 9;
   }
 
-  if(inString=="10"){
+  if(inString=="a"){
     mode = 10;
   }
 
-  if(inString=="11"){
+  if(inString=="b"){
     mode = 11;
   }
+
+  if(inString=="c"){
+    mode = 12;
+  }
+
+  if(inString=="d"){
+    mode = 13;
+  }
+  
 }  // end while
 
 // callback for sending data
