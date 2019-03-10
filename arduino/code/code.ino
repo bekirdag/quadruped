@@ -404,11 +404,11 @@ void loop() {
 } 
 
 void look_up() {
-  pwm.setPWM(9, 0, 300);
+  pwm.setPWM(8, 0, 300);
 }
 
 void look_down() {
-  pwm.setPWM(9, 0, 400);
+  pwm.setPWM(8, 0, 400);
 }
 
 // callback for received data
