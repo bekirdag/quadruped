@@ -107,7 +107,7 @@ void move_body_backwards() {
 
 void move_body_forwards() {
 
-  if(distance<=10) {
+  if(distance>=10) {
     return;
   }
   
