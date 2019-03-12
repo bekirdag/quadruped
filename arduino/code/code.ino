@@ -68,8 +68,8 @@ int move_dir = 0;
 
 void move_body_backwards() {
 
-  if(distance<10) {
-    return 0;
+  if(distance<=10) {
+    return;
   }
 
   pwm.setPWM(4, 0, SERVOMAX);
