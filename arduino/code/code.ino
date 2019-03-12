@@ -71,7 +71,7 @@ void move_body_backwards() {
   if(distance<=10) {
     return;
   }
-  else{
+
 
   pwm.setPWM(4, 0, SERVOMAX);
   pwm.setPWM(6, 0, SERVOMAX);
@@ -101,11 +101,15 @@ void move_body_backwards() {
   
   pwm.setPWM(5, 0, SERVOMAX);
   pwm.setPWM(7, 0, SERVOMAX);
-  }
+  
 
 }
 
 void move_body_forwards() {
+
+  if(distance<=10) {
+    return;
+  }
   
   pwm.setPWM(4, 0, SERVOMAX);
   pwm.setPWM(6, 0, SERVOMAX);
@@ -399,10 +403,10 @@ void loop() {
       move_dir = 0;
       break;
     case 12:
-      look_at(150);
+      look_at(450);
       break;
     case 13:
-      look_at(600);
+      look_at(550);
       break;
     case 14:
       look_at(375);
