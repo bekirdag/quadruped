@@ -13,7 +13,7 @@ int state = 0;
 int raspi_val;
 int mode = 0;
 
-int servoDelay = 120;
+int servoDelay = 360;
 
 String inString = "";
 
@@ -403,16 +403,16 @@ void loop() {
       move_dir = 0;
       break;
     case 12:
-      look_at(450);
+      look_at(200);
       break;
     case 13:
-      look_at(550);
+      look_at(300);
       break;
     case 14:
-      look_at(375);
+      look_at(400);
       break;
     case 15:
-      look_at(400);
+      look_at(500);
       break;
       
   }
