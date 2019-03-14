@@ -1,5 +1,15 @@
 #include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 #include <Adafruit_PWMServoDriver.h>
+#include <string.h>
+#include <ctype.h>
+
+
+#define OLED_RESET 4
+Adafruit_SSD1306 display(OLED_RESET);
+
+
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
@@ -258,6 +268,15 @@ void setup() {
 
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+
+  // display oled
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  display.clearDisplay(); // clearing the display
+  display.setTextColor(WHITE); //setting the color
+  display.setTextSize(1); //set the font size
+  display.setCursor(5,0); //set the cursor coordinates
+  display.print("initializing");
+  display.display();
 } 
 
 void standStill(int axis) {
@@ -288,6 +307,17 @@ void setDistance(){
   digitalWrite(trigPin, LOW);
   duration = pulseIn(echoPin, HIGH);
   distance = (duration/2) / 29.1;
+
+      // print time
+  display.clearDisplay();
+  display.setTextColor(WHITE); //setting the color
+  display.setTextSize(1); //set the font size
+  display.setCursor(5,0); //set the cursor coordinates
+
+  display.print("Distance: ");
+  display.print(distance);
+  display.print("cm");
+  display.display();
 }
 
 void loop() { 
