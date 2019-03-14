@@ -111,8 +111,8 @@ void move_body_forwards() {
     return;
   }
   
-  pwm.setPWM(4, 0, SERVOMAX);
-  pwm.setPWM(6, 0, SERVOMAX);
+  pwm.setPWM(4, 0, SERVOMIN+ninety);
+  pwm.setPWM(6, 0, SERVOMIN+ninety);
   
   delay(servoDelay);
   
@@ -125,8 +125,8 @@ void move_body_forwards() {
   
   pwm.setPWM(4, 0, SERVOMIN);
   pwm.setPWM(6, 0, SERVOMIN);
-  pwm.setPWM(5, 0, SERVOMIN);
-  pwm.setPWM(7, 0, SERVOMIN);
+  pwm.setPWM(5, 0, SERVOMAX-ninety);
+  pwm.setPWM(7, 0, SERVOMAX-ninety);
   
   delay(servoDelay);
   
