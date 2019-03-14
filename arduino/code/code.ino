@@ -466,7 +466,7 @@ void receiveData(int byteCount) {
 
 // callback for sending data
 void sendData() {
-  Wire.write(distance);
+  //Wire.write(distance);
   //delay(1000);
 }
 
