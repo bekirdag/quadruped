@@ -27,8 +27,8 @@ float tempC;
 int reading;
 int tempPin = 3;
 
-const int trigPin = 9;
-const int echoPin = 8;
+const int trigPin = 5;
+const int echoPin = 4;
 long duration;
 int distance;
 
