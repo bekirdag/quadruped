@@ -107,9 +107,7 @@ void move_body_backwards() {
 
 void move_body_forwards() {
 
-  if(distance>=10) {
-    return;
-  }
+
   
   pwm.setPWM(4, 0, SERVOMIN+ninety);
   pwm.setPWM(6, 0, SERVOMIN+ninety);
