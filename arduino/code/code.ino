@@ -7,7 +7,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define SERVOMAX  600 // this is the 'maximum' pulse length count (out of 4096)
 #define SLAVE_ADDRESS 0x04 // raspberry pi connection
 
-char coming_number[50];
+
 int state = 0;
 
 int raspi_val;
@@ -17,15 +17,6 @@ int servoDelay = 150;
 
 String inString = "";
 
-int photocellPin = 0;
-int photocellValue = 0;
-
-int micPin = A1;
-int micVal = 0;
-
-float tempC;
-int reading;
-int tempPin = 3;
 
 const int trigPin = 5;
 const int echoPin = 4;
@@ -262,19 +253,15 @@ void turn_right(int degree=ninety) {
 }
 
 void setup() { 
-
   pwm.begin();
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
   
-  analogReference(INTERNAL);
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+
   Serial.begin(9600);
   Wire.begin(SLAVE_ADDRESS);
   Wire.onReceive(receiveData);
 
   delay(10);
-  
 } 
 
 void standStill(int axis) {
@@ -298,16 +285,7 @@ void changePos(int positions[]) {
 }
 
 void setDistance(){
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH);
-  distance= duration*0.034/2;
-  Serial.print("Distance: ");
-  Serial.println(distance);
-  //delay(1000);
+
 }
 
 void loop() { 
