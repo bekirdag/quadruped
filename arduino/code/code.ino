@@ -1,5 +1,15 @@
 #include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 #include <Adafruit_PWMServoDriver.h>
+#include <string.h>
+#include <ctype.h>
+
+
+#define OLED_RESET 4
+Adafruit_SSD1306 display(OLED_RESET);
+
+
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
@@ -7,22 +17,16 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define SERVOMAX  600 // this is the 'maximum' pulse length count (out of 4096)
 #define SLAVE_ADDRESS 0x04 // raspberry pi connection
 
-
 int state = 0;
-
 int raspi_val;
 int mode = 0;
-
 int servoDelay = 150;
-
 String inString = "";
 
-
-const int trigPin = 5;
-const int echoPin = 4;
+const int trigPin = 8;
+const int echoPin = 9;
 long duration;
 int distance;
-
 
 int fourty_five = 112;
 int ninety = fourty_five*2;
@@ -256,12 +260,23 @@ void setup() {
   pwm.begin();
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
   
-
   Serial.begin(9600);
   Wire.begin(SLAVE_ADDRESS);
   Wire.onReceive(receiveData);
 
   delay(10);
+
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  // display oled
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  display.clearDisplay(); // clearing the display
+  display.setTextColor(WHITE); //setting the color
+  display.setTextSize(1); //set the font size
+  display.setCursor(5,0); //set the cursor coordinates
+  display.print("initializing");
+  display.display();
 } 
 
 void standStill(int axis) {
@@ -285,33 +300,29 @@ void changePos(int positions[]) {
 }
 
 void setDistance(){
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration/2) / 29.1;
 
+      // print time
+  display.clearDisplay();
+  display.setTextColor(WHITE); //setting the color
+  display.setTextSize(1); //set the font size
+  display.setCursor(5,0); //set the cursor coordinates
+
+  display.print("Distance: ");
+  display.print(distance);
+  display.print("cm");
+  display.display();
 }
 
 void loop() { 
   setDistance();
-  //sendData();
-/*
-  photocellValue = analogRead(photocellPin);
-  Serial.println("Light value: ");
-  Serial.println(photocellValue);
 
-  reading = analogRead(tempPin);
-  float voltage = reading * 5.19;
-  voltage /= 1024.0;
-  
-  float temperatureC = (voltage - 0.5) * 100 ;
-  Serial.print(temperatureC); Serial.println(" degrees C");
-  delay(1000);
-
-  micVal = analogRead(micPin);
-  Serial.println("Volume: ");
-  Serial.println (micVal);
-
- RawValue = analogRead(analogIn);
- Voltage = (RawValue / 1024.0) * 5000; // Gets you mV
- Amps = ((Voltage - ACSoffset) / mVperAmp);
-*/
   
   switch (mode) {
     case 0:
