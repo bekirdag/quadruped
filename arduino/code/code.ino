@@ -13,7 +13,7 @@ int state = 0;
 int raspi_val;
 int mode = 0;
 
-int servoDelay = 360;
+int servoDelay = 240;
 
 String inString = "";
 
