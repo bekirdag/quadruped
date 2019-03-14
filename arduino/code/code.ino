@@ -111,8 +111,8 @@ void move_body_forwards() {
     return;
   }
   
-  pwm.setPWM(4, 0, SERVOMAX-ninety);
-  pwm.setPWM(6, 0, SERVOMAX-ninety);
+  pwm.setPWM(4, 0, SERVOMIN+ninety);
+  pwm.setPWM(6, 0, SERVOMIN+ninety);
   
   delay(servoDelay);
   
@@ -137,8 +137,8 @@ void move_body_forwards() {
   
   delay(servoDelay);
   
-  pwm.setPWM(5, 0, SERVOMAX-ninety);
-  pwm.setPWM(7, 0, SERVOMAX-ninety);
+  pwm.setPWM(5, 0, SERVOMIN+ninety);
+  pwm.setPWM(7, 0, SERVOMIN+ninety);
 }
 
 void side_walk_backwards() {
@@ -269,20 +269,6 @@ void turn_right(int degree=ninety) {
   pwm.setPWM(7, 0, SERVOMAX);
 }
 
-void goLay() {
-  newServoValue(1,ninety*(-1));
-  newServoValue(8,ninety*(-1));
-  newServoValue(5,ninety*(-1));
-  newServoValue(7,ninety*(-1));
-}
-
-void goUp() {
-  newServoValue(1,0);
-  newServoValue(8,0);
-  newServoValue(5,0);
-  newServoValue(7,0);
-}
-
 void setup() { 
 
   pwm.begin();
@@ -313,8 +299,7 @@ void standStill(int axis) {
 void changePos(int positions[]) {
   for (int servoNum = 0; servoNum < 8; servoNum++) {
     int servoControl = servoNum;
-    //servoControl = (servoNum==3) ? 8 : servoNum;
-    delay(servoDelay);
+    
     pwm.setPWM(servoControl, 0, positions[servoNum]);
     //newServoValue(servoControl,0);
   }
@@ -387,11 +372,11 @@ void loop() {
       move_dir = 0;
       break;
     case 8:
-      goUp();
+
       move_dir = 0;
       break;
     case 9:
-      goLay();
+
       move_dir = 0;
       break;
     case 10:
