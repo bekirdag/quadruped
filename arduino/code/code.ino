@@ -13,7 +13,7 @@ int state = 0;
 int raspi_val;
 int mode = 0;
 
-int servoDelay = 180;
+int servoDelay = 150;
 
 String inString = "";
 
@@ -111,8 +111,8 @@ void move_body_forwards() {
     return;
   }
   
-  pwm.setPWM(4, 0, SERVOMAX);
-  pwm.setPWM(6, 0, SERVOMAX);
+  pwm.setPWM(4, 0, SERVOMAX-ninety);
+  pwm.setPWM(6, 0, SERVOMAX-ninety);
   
   delay(servoDelay);
   
@@ -137,8 +137,8 @@ void move_body_forwards() {
   
   delay(servoDelay);
   
-  pwm.setPWM(5, 0, SERVOMAX);
-  pwm.setPWM(7, 0, SERVOMAX);
+  pwm.setPWM(5, 0, SERVOMAX-ninety);
+  pwm.setPWM(7, 0, SERVOMAX-ninety);
 }
 
 void side_walk_backwards() {
